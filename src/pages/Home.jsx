@@ -1,8 +1,3 @@
-// ─── Week 10 Upgrade: Redux Toolkit (RTK) ────────────────────────────────
-// Level 1 – Favorites slice (add/remove via dispatch)
-// Level 2 – Filters slice (genre, minRating, sortBy stored in global store)
-// Level 3 – useMemo for filtered/sorted list, useCallback for stable handlers
-
 import { useState, useCallback, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavorite, selectFavIds } from '../store/favoritesSlice';
@@ -15,7 +10,6 @@ import useDebounce from '../hooks/useDebounce';
 import useMovies from '../hooks/useMovies';
 import { searchMovies } from '../utils/api';
 
-// ── Groq Mood Matcher ────────────────────────────────────────────────────
 const getMoodMovieFromGroq = async (moodText) => {
   const apiKey = import.meta.env.VITE_GROQ_API_KEY;
   if (!apiKey || apiKey === 'your_groq_api_key_here') throw new Error('GROQ_KEY_MISSING');
@@ -46,17 +40,17 @@ const getMoodMovieFromGroq = async (moodText) => {
   return data.choices?.[0]?.message?.content?.trim() || null;
 };
 
-// ── Home Page ─────────────────────────────────────────────────────────────
-const Home = () => {
-  // ── Redux state ────────────────────────────────────────────────────────
-  const dispatch = useDispatch();
-  const favIds = useSelector(selectFavIds); // Set<id>
-  const filters = useSelector(selectFilters); // { genre, minRating, sortBy }
 
-  // ── Local UI state ─────────────────────────────────────────────────────
-  const toastRef = useRef(null); // ✅ scoped — no module-level variable
-  const moodCacheRef = useRef(new Map()); // ✅ cache mood results to avoid repeat API calls
-  const moodDebounceRef = useRef(null); // ✅ debounce the mood match button
+const Home = () => {
+ 
+  const dispatch = useDispatch();
+  const favIds = useSelector(selectFavIds); 
+  const filters = useSelector(selectFilters); 
+
+ 
+  const toastRef = useRef(null); 
+  const moodCacheRef = useRef(new Map());
+  const moodDebounceRef = useRef(null); 
   const [rawQuery, setRawQuery] = useState('');
   const [toast, setToast] = useState(null);
   const [moodText, setMoodText] = useState('');
@@ -68,7 +62,7 @@ const Home = () => {
   const debouncedQuery = useDebounce(rawQuery, 500);
   const { movies, loading, loadingMore, error, hasMore, loadMore } = useMovies(debouncedQuery);
 
-  // ── Level 1: dispatch to Redux ─────────────────────────────────────────
+ 
   const handleToggleFav = useCallback(
     (movie) => {
       const isCurrentlyFav = favIds.has(movie.id);
@@ -80,7 +74,7 @@ const Home = () => {
     [dispatch, favIds],
   );
 
-  // ── Level 3: useMemo — recomputes only when movies or filters change ───
+ 
   const filteredMovies = useMemo(() => {
     let result = [...movies];
 
@@ -103,9 +97,9 @@ const Home = () => {
     return result;
   }, [movies, filters]);
 
-  // ── Mood Matcher ───────────────────────────────────────────────────────
+  
   const runMoodMatch = useCallback(async (text) => {
-    // ✅ Cache check — skip API call if we've seen this mood before
+    
     if (moodCacheRef.current.has(text)) {
       const cached = moodCacheRef.current.get(text);
       setMoodResult(cached.result);
@@ -126,7 +120,7 @@ const Home = () => {
       const result = { title: suggestedTitle, movie };
       const matchId = movie?.id ?? null;
 
-      // ✅ Store in cache for this session
+      
       moodCacheRef.current.set(text, { result, matchId });
 
       setMoodResult(result);
@@ -142,7 +136,7 @@ const Home = () => {
     }
   }, []);
 
-  // ✅ Debounced trigger — prevents hammering the API on rapid clicks
+
   const handleMoodMatch = useCallback(() => {
     const text = moodText.trim();
     if (!text) return;
@@ -230,7 +224,7 @@ const Home = () => {
                   ? '🔑 Please add your VITE_TMDB_API_KEY to the .env file to load movies.'
                   : `Error: ${error}`}
               </span>
-              {/* ✅ Retry button — reload the current query */}
+              {/* Retry button — reload the current query */}
               {!error.includes('TMDB_API_KEY_MISSING') && (
                 <button
                   className="error-retry"
@@ -258,7 +252,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* ✅ aria-live: screen readers announce toast messages without focus moving */}
+      {/* aria-live: screen readers announce toast messages without focus moving */}
       <div aria-live="polite" aria-atomic="true">
         {toast && <div className="toast">{toast}</div>}
       </div>
