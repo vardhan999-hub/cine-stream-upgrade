@@ -114,17 +114,17 @@ Filters update the UI instantly using global state.
 
 ## 🎯 Requirements Covered
 
-### ✅ Level 1
+###  Level 1
 
 * Redux store setup
 * Favorites management using slice
 
-### ✅ Level 2
+###  Level 2
 
 * Global filtering system
 * State-driven UI updates
 
-### ✅ Level 3
+###  Level 3
 
 * Render optimization
 * Global theme management
