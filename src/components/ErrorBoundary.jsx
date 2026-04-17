@@ -1,8 +1,4 @@
-// ─── ErrorBoundary.jsx ────────────────────────────────────────────────────
-// React error boundaries must be class components — there is no hook
-// equivalent because they catch errors during render, not in event handlers.
-// Wrapping route-level components means a crash in one page doesn't take
-// down the entire app.
+
 
 import { Component } from 'react';
 
@@ -17,7 +13,8 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, info) {
-    // In production you'd send this to Sentry / Datadog
+
+    
     console.error('[ErrorBoundary]', error, info.componentStack);
   }
 
