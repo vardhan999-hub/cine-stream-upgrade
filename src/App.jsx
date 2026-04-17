@@ -51,7 +51,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
-      {/* ✅ ErrorBoundary per route — a crash in one page won't break the other */}
+      {/* ErrorBoundary per route — a crash in one page won't break the other */}
       <Routes>
         <Route
           path="/"
