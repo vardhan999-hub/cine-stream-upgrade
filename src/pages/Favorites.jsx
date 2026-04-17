@@ -1,7 +1,3 @@
-// ─── Week 10: Favorites reads from Redux store ────────────────────────────
-// Fix: useRef for toast timeout instead of module-level let (avoids shared
-//      state across component instances and memory leak risk)
-
 import { useCallback, useState, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavorite, selectFavorites } from '../store/favoritesSlice';
@@ -11,10 +7,7 @@ const Favorites = () => {
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
   const [toast, setToast] = useState(null);
-  const toastRef = useRef(null); // ✅ scoped to this instance, no leak
-
-  // useMemo prevents favIds from being recreated on every render,
-  // which would otherwise make the useCallback below re-run unnecessarily
+  const toastRef = useRef(null);
   const favIds = useMemo(() => new Set(favorites.map((m) => m.id)), [favorites]);
 
   const showToast = useCallback((msg) => {
