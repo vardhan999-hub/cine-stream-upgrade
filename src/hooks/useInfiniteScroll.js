@@ -1,6 +1,4 @@
-// Fix: observer.disconnect() instead of observer.unobserve(el)
-// disconnect() tears down the entire observer — more reliable cleanup,
-// especially if the sentinel ref changes between renders.
+
 
 import { useEffect, useRef, useCallback } from 'react';
 
@@ -27,7 +25,7 @@ const useInfiniteScroll = ({ onIntersect, enabled = true }) => {
     if (el) observer.observe(el);
 
     return () => {
-      observer.disconnect(); // ✅ cleaner than unobserve — removes all targets
+      observer.disconnect(); 
     };
   }, [handleIntersect]);
 
