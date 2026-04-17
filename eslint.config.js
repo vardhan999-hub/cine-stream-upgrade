@@ -32,13 +32,13 @@ export default [
       },
     },
     rules: {
-      // Hooks correctness — the most important rule for React apps
+      
       ...reactHooks.configs.recommended.rules,
 
-      // Warns if a file mixes component and non-component exports (breaks HMR)
+      
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 
-      // General quality
+      
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'no-console':     ['warn', { allow: ['warn', 'error'] }],
       'prefer-const':   'error',
@@ -46,7 +46,6 @@ export default [
     },
   },
 
-  // Disable all formatting rules — Prettier handles those
   prettierConfig,
 
   { ignores: ['dist/', 'node_modules/'] },
