@@ -1,6 +1,3 @@
-// Fix: Added loading and error states for genre API fetch.
-// Shows a skeleton while genres load and a retry button on failure.
-
 import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -34,8 +31,8 @@ const FilterSidebar = () => {
   const { genre, minRating, sortBy } = useSelector(selectFilters);
 
   const [genres, setGenres] = useState([]);
-  const [genreLoading, setGenreLoading] = useState(true); // ✅ loading state
-  const [genreError, setGenreError] = useState(null); // ✅ error state
+  const [genreLoading, setGenreLoading] = useState(true); 
+  const [genreError, setGenreError] = useState(null); 
 
   const loadGenres = useCallback(async () => {
     setGenreLoading(true);
@@ -71,7 +68,7 @@ const FilterSidebar = () => {
       <div className="filter-group">
         <p className="filter-label">GENRE</p>
 
-        {/* ✅ Loading skeleton */}
+        {/*  Loading skeleton */}
         {genreLoading && (
           <div className="filter-chips">
             {[...Array(6)].map((_, i) => (
@@ -80,7 +77,7 @@ const FilterSidebar = () => {
           </div>
         )}
 
-        {/* ✅ Error + retry */}
+        {/*  Error + retry */}
         {genreError && !genreLoading && (
           <div className="filter-error">
             <span>Failed to load</span>
