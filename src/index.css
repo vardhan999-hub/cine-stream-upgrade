@@ -1,4 +1,4 @@
-/* ─── Reset & Base ─────────────────────────────────────────────── */
+
 *,
 *::before,
 *::after {
@@ -569,7 +569,7 @@ img {
   color: var(--muted);
 }
 
-/* Mood match highlight */
+
 .mood-match-card {
   border-color: rgba(79, 142, 247, 0.4);
   box-shadow: 0 0 0 2px rgba(79, 142, 247, 0.15);
@@ -746,11 +746,7 @@ img {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   WEEK 10 ADDITIONS — Redux Theme + Filter Sidebar
-   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Light Theme Variables ─────────────────────────────────────────────── */
 [data-theme='light'] {
   --bg: #f4f5f7;
   --bg2: #ffffff;
@@ -813,7 +809,7 @@ img {
   border-color: var(--border);
 }
 
-/* ── Theme Toggle Button ───────────────────────────────────────────────── */
+
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -836,7 +832,7 @@ img {
   transform: rotate(20deg);
 }
 
-/* ── Discover Layout (sidebar + main) ──────────────────────────────────── */
+
 .discover-layout {
   display: flex;
   gap: 28px;
@@ -849,7 +845,7 @@ img {
   min-width: 0;
 }
 
-/* ── Filter Sidebar ────────────────────────────────────────────────────── */
+
 .filter-sidebar {
   width: 220px;
   flex-shrink: 0;
@@ -934,7 +930,7 @@ img {
   font-weight: 600;
 }
 
-/* ── Responsive: collapse sidebar on small screens ─────────────────────── */
+
 @media (max-width: 768px) {
   .discover-layout {
     flex-direction: column;
@@ -946,7 +942,7 @@ img {
   }
 }
 
-/* ── Filter Sidebar: skeleton + error states ───────────────────────────── */
+
 .filter-chip--skeleton {
   width: 56px;
   height: 26px;
@@ -974,7 +970,7 @@ img {
   color: var(--muted);
 }
 
-/* ── Error banner with retry ────────────────────────────────────────────── */
+
 .error-banner {
   display: flex;
   align-items: center;
@@ -998,7 +994,7 @@ img {
   background: var(--bg3);
 }
 
-/* ── Error Boundary fallback UI ─────────────────────────────────────────── */
+
 .error-boundary {
   display: flex;
   flex-direction: column;
