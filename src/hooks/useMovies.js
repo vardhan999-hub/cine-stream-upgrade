@@ -1,7 +1,3 @@
-// Fix: removed the setTimeout hack for isFetchingRef.
-// It's now reset inside the finally block of fetchPage — after the fetch
-// actually completes, not after an arbitrary 500ms delay.
-
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchPopularMovies, searchMovies } from '../utils/api';
 
@@ -17,7 +13,7 @@ const useMovies = (query = '') => {
 
   const activeQueryRef = useRef(query);
   const abortRef = useRef(null);
-  const isFetchingRef = useRef(false); // ← guards against double-firing loadMore
+  const isFetchingRef = useRef(false); 
 
   const fetchPage = useCallback(async (q, pageNum, reset) => {
     abortRef.current?.abort();
@@ -27,7 +23,7 @@ const useMovies = (query = '') => {
     if (reset) setLoading(true);
     else setLoadingMore(true);
     setError(null);
-    isFetchingRef.current = true; // mark in-flight
+    isFetchingRef.current = true; 
 
     try {
       const data = q
@@ -49,7 +45,7 @@ const useMovies = (query = '') => {
         setLoading(false);
         setLoadingMore(false);
       }
-      // ✅ Reset exactly when the fetch is done, not after an arbitrary timeout
+      
       isFetchingRef.current = false;
     }
   }, []);
@@ -65,12 +61,12 @@ const useMovies = (query = '') => {
   useEffect(() => {
     if (page === 1) return;
     fetchPage(query, page, false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [page]);
 
   const loadMore = useCallback(() => {
     if (loadingMore || loading || page >= totalPages) return;
-    if (isFetchingRef.current) return; // already in-flight
+    if (isFetchingRef.current) return; 
     setPage((p) => p + 1);
   }, [loadingMore, loading, page, totalPages]);
 
