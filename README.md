@@ -3,6 +3,8 @@
 A production-ready **movie discovery application** enhanced with **Redux Toolkit**, focused on scalable state management, performance optimization, and clean architecture.
 
 🔗 **Live Demo:** [https://cine-stream-upgrade.vercel.app/](https://cine-stream-upgrade-five.vercel.app/)
+
+
 📂 **GitHub Repository:** https://github.com/vardhan999-hub/cine-stream-upgrade
 
 ---
