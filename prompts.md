@@ -1,151 +1,204 @@
-# 🧪 Prompts.md — Testing Suite Notes
+# 🎬 Prompts.md — Cine-Stream Redux Upgrade Notes
 
-**Project:** Testing Suite
-**Week:** 11
-**Track:** Frontend (Testing)
-**Name:** Tadigadapa Harshavardhan
+**Project:** Cine-Stream — Advanced State Management
+**Week:** 10
+**Track:** A — Frontend Specialists
+**Intern:** Tadigadapa Harshavardhan
 
 ---
 
 ## 📌 Overview
 
-This file contains the prompts I used while learning and building the testing part of my project.
+This document explains how AI was used as a **learning reference** during the upgrade of Cine-Stream with **Redux Toolkit and advanced state management**.
 
-I used AI mainly to understand concepts and clear doubts.
-All the code, debugging, and final implementation were done by me.
+### 🎯 Focus Areas
 
----
+* Eliminating prop drilling using **global state**
+* Managing application state using **Redux Toolkit**
+* Implementing **global filters**
+* Optimizing rendering performance
+* Managing **theme globally**
 
-## 🔹 Prompt 1 — What is Jest and React Testing Library?
-
-**Prompt:**
-What is Jest? What is React Testing Library?
-
-**What I understood:**
-
-* Jest is used to run tests and show results (pass/fail)
-* React Testing Library is used to test UI like how a user interacts
-
-**What I did:**
-
-* Installed required packages
-* Set up Jest config and setupTests file
+> AI was used only for conceptual understanding.
+> All implementation, debugging, and decisions were done independently.
 
 ---
 
-## 🔹 Prompt 2 — Basic Component Testing
+## 🔹 Prompt 1 — Why Redux Toolkit?
 
-**Prompt:**
-How to test if a component renders properly?
+**Prompt Used:**
+Why should I use Redux Toolkit instead of Context API?
 
-**What I did:**
+**Implementation:**
 
-* Tested Button, Input, and Counter components
-* Checked if they render without crashing
-* Verified text using props
+* Identified that prop drilling becomes difficult in larger apps
+* Understood Context API limitations for complex state
+* Introduced Redux Toolkit for centralized state
 
----
-
-## 🔹 Prompt 3 — User Interaction Testing
-
-**Prompt:**
-How to simulate user actions in tests?
-
-**What I did:**
-
-* Used userEvent for clicking buttons
-* Used userEvent.type for input fields
-* Verified UI updates after actions
-
-Example: clicking increment changes value
+✔ Created global store
+✔ Structured state using slices
 
 ---
 
-## 🔹 Prompt 4 — Why use getByRole?
+## 🔹 Prompt 2 — Creating Redux Store & Slices
 
-**Prompt:**
-Why use getByRole instead of getByTestId?
+**Prompt Used:**
+How to structure a Redux store using Redux Toolkit?
 
-**What I understood:**
+**Implementation:**
 
-* getByRole is closer to how users interact
-* It makes tests more realistic
+* Created `store/store.js`
+* Created slices:
 
-**What I did:**
+  * `favoritesSlice` → manages saved movies
+  * `filtersSlice` → manages filtering state
+  * `themeSlice` → manages dark/light mode
 
-* Replaced most testId usage with getByRole
-* Used getByTestId only where needed
-
----
-
-## 🔹 Prompt 5 — Testing State Changes
-
-**Prompt:**
-How to test state updates in React?
-
-**What I did:**
-
-* Tested Counter component
-* Checked increment, decrement, and reset
-* Also handled min and max values
+✔ Used `createSlice` for clean reducer logic
+✔ Used actions and dispatch properly
 
 ---
 
-## 🔹 Prompt 6 — Mocking API Calls
+## 🔹 Prompt 3 — Favorites Management
 
-**Prompt:**
-How to mock fetch in Jest?
+**Prompt Used:**
+How to manage favorites globally using Redux?
 
-**What I did:**
+**Implementation:**
 
-* Used global.fetch with jest.fn()
-* Returned fake data instead of calling real API
+* Moved favorites logic from local state to Redux
+* Implemented `toggleFavorite` action
+* Synced favorites with localStorage
 
----
-
-## 🔹 Prompt 7 — Testing API Scenarios
-
-**Prompt:**
-How to test loading and error states?
-
-**What I did:**
-
-* Tested loading state
-* Tested success response
-* Tested error case
-* Tested empty state
+✔ Eliminated prop drilling
+✔ Centralized favorite state
 
 ---
 
-## 🔹 Prompt 8 — Test Coverage
+## 🔹 Prompt 4 — Global Filtering System
 
-**Prompt:**
-How to check test coverage?
+**Prompt Used:**
+How to implement filters using global state?
 
-**What I did:**
+**Implementation:**
 
-* Ran coverage command
-* Improved tests to cover more cases
+* Created filter sidebar UI
+* Stored filter values in Redux
+* Applied filters globally to movie list
 
-Final result:
-
-* Coverage above 90%
-
----
-
-## 🔧 Extra Work Done by Me
-
-* Organized files properly
-* Used separate test files for each component
-* Made sure all tests pass without errors
-* Improved readability of tests
+✔ Filters update UI instantly
+✔ No need to pass props across components
 
 ---
 
-## 🎯 Final Thoughts
+## 🔹 Prompt 5 — Performance Optimization
 
-* Testing helped me understand my code better
-* Writing tests feels difficult at first, but becomes easier
-* Mocking APIs is important for reliable tests
+**Prompt Used:**
+How to prevent unnecessary re-renders in React?
 
-This project helped me understand how testing works in real projects.
+**Implementation:**
+
+* Used `useMemo` for filtering and sorting logic
+* Used `useCallback` for event handlers
+* Used `createSelector` for memoized Redux state
+
+✔ Improved performance for large movie lists
+
+---
+
+## 🔹 Prompt 6 — Infinite Scroll Optimization
+
+**Prompt Used:**
+How to implement efficient infinite scrolling?
+
+**Implementation:**
+
+* Used `IntersectionObserver`
+* Created custom hook `useInfiniteScroll`
+* Added proper cleanup using `observer.disconnect()`
+
+✔ Prevented memory leaks
+✔ Optimized loading behavior
+
+---
+
+## 🔹 Prompt 7 — Handling API Race Conditions
+
+**Prompt Used:**
+How to avoid stale API responses?
+
+**Implementation:**
+
+* Used `AbortController` to cancel previous requests
+* Used `useRef` to track active query
+* Ignored outdated responses
+
+✔ Prevented incorrect UI updates
+
+---
+
+## 🔹 Prompt 8 — Debouncing Search
+
+**Prompt Used:**
+How to debounce user input in React?
+
+**Implementation:**
+
+* Created custom hook `useDebounce`
+* Delayed API calls until user stops typing
+
+✔ Reduced unnecessary API requests
+
+---
+
+## 🔹 Prompt 9 — Theme Management
+
+**Prompt Used:**
+How to manage theme globally?
+
+**Implementation:**
+
+* Created `themeSlice` in Redux
+* Stored theme state globally
+* Persisted theme using localStorage
+
+✔ Theme applied across entire app
+
+---
+
+## 🔧 Additional Work (Independent)
+
+* Implemented API layer with centralized fetch logic
+* Added environment validation using Zod
+* Fixed race conditions in API calls
+* Implemented caching for better performance
+* Added retry mechanism for failed requests
+* Handled empty states and loading states
+
+---
+
+## 📊 Week 9 vs Week 10
+
+| Feature          | Week 9        | Week 10       |
+| ---------------- | ------------- | ------------- |
+| State Management | Local + Props | Redux Toolkit |
+| Prop Drilling    | Present       | Eliminated    |
+| Filters          | Local State   | Global State  |
+| Theme            | Basic         | Redux Managed |
+| Optimization     | Partial       | Advanced      |
+| Architecture     | SSR-focused   | State-focused |
+
+---
+
+## 🎯 Final Reflection
+
+AI was used strictly as a **learning aid**, not for implementation.
+
+### Key Learnings:
+
+* Redux Toolkit simplifies complex state management
+* Global state improves scalability
+* Performance optimization is essential for large apps
+* Proper architecture reduces bugs and improves maintainability
+
+This upgrade reflects a **real-world application structure**, similar to production-level frontend systems.
